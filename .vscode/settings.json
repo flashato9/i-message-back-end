@@ -21,5 +21,18 @@
     ".vscode": true,
     "public": true
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5433,
+      "driver": "PostgreSQL",
+      "name": "wsl_server",
+      "group": "WSL",
+      "database": "iMessage",
+      "username": "postgres",
+      "password": "admin"
+    }
+  ]
 }

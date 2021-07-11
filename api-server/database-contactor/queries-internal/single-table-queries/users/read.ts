@@ -15,7 +15,7 @@ export async function getUserTuple(username: string): Promise<UserTuple> {
   try {
     devDBInfoLogger(`Reading tuple from "${USERS_TN}" table.`);
     const data: UserTuple = (await pg(tableName).select("*").where({ username: username }))[0];
-    devDBInfoLogger("Successfully read user tuple:", data);
+    devDBInfoLogger("Successfully read user tuple.");
     return data;
   } catch (error) {
     devDBErrorLogger(`Error executing ${getUserTuple.name}()-->`, error);
@@ -26,7 +26,7 @@ export async function tupleExists(username: string): Promise<boolean> {
   try {
     devDBInfoLogger(`Reading tuple from "${USERS_TN}" table.`);
     const data = await pg(USERS_TN).select("*").where({ username: username });
-    devDBInfoLogger("Successfully read user tuple:", data);
+    devDBInfoLogger("Successfully read user tuple.");
     if (data.length === 0) return false;
     else return true;
   } catch (error) {

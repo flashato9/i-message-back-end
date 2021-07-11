@@ -13,7 +13,7 @@ export async function createTuple(user: UserTuple) {
   try {
     devDBInfoLogger(`Inserting tuple into "${USERS_TN}" table.`);
     await pg(USERS_TN).insert(user);
-    devDBInfoLogger("Successfully inserted tuple:", user);
+    devDBInfoLogger("Successfully inserted tuple.");
     return;
   } catch (error: any) {
     devDBErrorLogger(`Error executing ${createTuple.name}()-->`, error);

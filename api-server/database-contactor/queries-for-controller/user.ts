@@ -20,7 +20,7 @@ export async function getUser(username: string): Promise<User> {
     throw error;
   }
 }
-class User {
+export class User {
   /**
    *
    * @param user
@@ -100,4 +100,51 @@ class User {
   get jwt() {
     return generateJWT(this.user);
   }
+  public static usernameReqMet(username: string) {
+    if (isEmptyString(username)) {
+      return false; // don't validate empty values to allow optional controls
+    }
+    const minLengthSatisfied: boolean = username.length >= 3;
+    const maxLengthSatisfied: boolean = username.length <= 100;
+    const alphaUnderscoreSatisfied: boolean = /^\w+$/.test(username);
+
+    if (!minLengthSatisfied) return false;
+    if (!maxLengthSatisfied) return false;
+    if (!alphaUnderscoreSatisfied) return false;
+    return true;
+  }
+  public static emailReqMet(email: string) {
+    const noSpacesSatisfied: boolean = /^(?!.*\s+)/.test(email);
+    const emailSatisfied: boolean =
+      /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(
+        email
+      );
+    if (!noSpacesSatisfied) return false;
+    if (!emailSatisfied) return false;
+    return true;
+  }
+  public static strongPasswordReqMet(password: string) {
+    if (isEmptyString(password)) {
+      return false; // don't validate empty values to allow optional controls
+    }
+    const minLengthSatisfied: boolean = password.length >= 8;
+    const maxLengthSatisfied: boolean = password.length <= 100;
+    const noSpacesSatisfied: boolean = /^(?!.*\s+)/.test(password);
+    const lowercaseSatisfied: boolean = /^(?=.*[a-z]+)/.test(password);
+    const uppercaseSatisfied: boolean = /^(?=.*[A-Z]+)/.test(password);
+    const numberSatisfied: boolean = /^(?=.*[0-9]+)/.test(password);
+    const specialCharacterSatisfied: boolean = /^(?=.*[!@#$&-]+)/.test(password);
+
+    if (!minLengthSatisfied) return false;
+    if (!maxLengthSatisfied) return false;
+    if (!noSpacesSatisfied) return false;
+    if (!lowercaseSatisfied) return false;
+    if (!uppercaseSatisfied) return false;
+    if (!numberSatisfied) return false;
+    if (!specialCharacterSatisfied) return false;
+    return true;
+  }
+}
+function isEmptyString(value: string): boolean {
+  return value.length === 0;
 }

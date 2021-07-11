@@ -5,6 +5,7 @@ export const infoDBLogger = debug("iMessage:database:info");
 export const errorDBLogger = debug("iMessage:database:error");
 export const emailInfoLogger = debug("iMessage:email:info");
 export const emailErrorLogger = debug("iMessage:email:error");
+export const malFormatInputLogger = debug("iMessage:user-input:error");
 
 //dev for local calls, or calls to DB post connection phase.
 export const devEmailInfoLogger = debug("iMessage:dev:email:info");
