@@ -18,7 +18,7 @@ export async function sendConfirmationCodeToEmail(user: UserTuple) {
   };
   emailInfoLogger(`Sending confirmation code email to "${user.email}"`);
   const result = await send(msg);
-  emailInfoLogger(`Email confirmation code successfuly sent to "${user.email}"`, result);
+  emailInfoLogger(`Email confirmation code successfuly sent to "${user.email}"`);
   try {
   } catch (error) {
     emailErrorLogger(`Error occured when sending confirmation code email to "${user.email}"`, error);
